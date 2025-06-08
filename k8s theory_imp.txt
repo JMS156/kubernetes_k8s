@@ -1,0 +1,14 @@
+THEORY IMP:
+
+CONTROL MANAGER (this is like actual manager in your company, needs all the updates) -  It makes sure that what user requested is actually fullfilled, it gets inmformation from below etcd cluster.
+
+etcd CLUSTER (third party component k8s need this) - It a state file, TF state, which has the info0rmation what user requested, like how many containers should be there in one POD ! configuration database
+
+API server - etcd CLUSTER can only be accessed by this API server, no one else can have access to etcd cluster.
+
+etcd -> API server -> control manager 
+
+api server acts like a messenger, nothing else, when user updates etcd, etcd sends update to api server, then api server sends further to control manager.
+
+kUBE scheduler -  this is an employee who actually does the work, like adding extra container to the POD, this scheduler will do. This is a actual worker on the ground.
+
