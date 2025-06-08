@@ -1,0 +1,8 @@
+node controler : it checks in aws, azure, gcp is node is up & running.
+
+route controler : sets network, routes on cloud.
+
+service controller - responsible for load balancers LB on cloud.
+
+volume controller : responsible for creating, attaching volumes, ebs, efs etc..
+
