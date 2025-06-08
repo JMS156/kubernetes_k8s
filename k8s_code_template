@@ -1,0 +1,6 @@
+k8s code can be written in two formats : JSON or YML, YAML
+
+code file : MANIFEST.JSON !!
+
+Manifest sends the update from the user to api-server , & rest you know how information flows & reaches KUBE scheduler. which does the actual job.
+
