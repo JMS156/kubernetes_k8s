@@ -1,0 +1,10 @@
+POD is most essential entity which kubernetes need's, to that kubernetes can manage the containers.
+
+Containers are created inside POD, nay number of containers cna be created inside a particaulr POD.
+
+KUBE PROXY : ASSIGNS IP-ADDRESS TO EACH POD.
+
+NOTE : CONTAINER DOES NOT HAS ANY OF ITS OWN IP ADDRESS, IP ADDRESS IS ALWAYS BELONGS TO POD. CONTAINER/CONTAINERS RESIDES INSIDE POD.
+
+NOTE : IF FOR SOME REASON PARTICULAR POD IS MALFUNCTIONED OR FAILED, THEN THAT POD CANNOT BE CREATED AGAIN, NEW POD MUST BE CREATED, WHICH MEANS NEW IP ADDRESS.
+
