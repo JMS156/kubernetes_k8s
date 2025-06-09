@@ -1,0 +1,49 @@
+kubectl get pods: Lists all pods in the default namespace.
+
+kubectl get pods --all-namespaces: Lists all pods across all namespaces.
+
+kubectl get pods -n <namespace>: Lists pods in a specific namespace.
+
+kubectl get pods -o wide: Lists pods with additional information (e.g., node, IP address).
+
+kubectl apply -f <pod-definition.yml>: Creates or updates a pod using a YAML file.
+
+kubectl run <pod-name> --image=<image-name> --restart=Never: Creates a pod directly from the command line.
+
+kubectl describe pod <pod-name>: Provides detailed information about a specific pod.
+
+kubectl logs <pod-name>: Shows the logs of a pod’s container.
+
+kubectl logs <pod-name> -c <container-name>: Shows logs from a specific container in a pod.
+
+kubectl logs <pod-name> -c <container-name> --previous: Shows logs from the previous instance of a container.
+
+kubectl delete pod <pod-name>: Deletes a specific pod.
+
+kubectl delete pods --all -n <namespace>: Deletes all pods in a specific namespace.
+
+kubectl delete pods -l <label-selector>: Deletes pods based on a label selector.
+
+kubectl exec -it <pod-name> -- <command>: Executes a command inside a running pod.
+
+kubectl exec -it <pod-name> -- /bin/bash: Starts a shell session inside a pod's container.
+
+kubectl port-forward <pod-name> <local-port>:<pod-port>: Forwards a local port to a pod’s port.
+
+kubectl scale deployment <deployment-name> --replicas=<number-of-replicas>: Scales the number of pod replicas in a deployment.
+
+kubectl get events: Lists events related to pods, useful for debugging.
+
+kubectl top pod <pod-name>: Displays resource usage (CPU, memory) for a specific pod.
+
+kubectl top pods: Displays resource usage for all pods.
+
+kubectl get pod <pod-name> -o yaml: Displays the pod configuration in YAML format.
+
+kubectl get pods -l <label-selector>: Lists pods matching a specific label selector.
+
+kubectl set image deployment/<deployment-name> <container-name>=<new-image>: Performs a rolling update to a deployment by updating the container image.
+
+kubectl describe pod <pod-name>: Shows events and detailed status for troubleshooting a pod.
+
+kubectl get pods --field-selector status.phase=Failed: Lists pods that are in the 'Failed' phase (useful for debugging failed pods).
