@@ -1,0 +1,201 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server-deployment
+  labels:
+    app: myapp
+    task: web-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      task: web-server
+  template:
+    metadata:
+      labels:
+        app: myapp
+        task: web-server
+    spec:
+      containers:
+        - name: container-1
+          image: nginx:latest
+          command: ["/bin/bash", "-c", "nginx -g 'daemon off;'"]
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: web-content
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: web-content
+          configMap:
+            name: web-content-config
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-server-deployment
+  labels:
+    app: myapp
+    task: api-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+      task: api-server
+  template:
+    metadata:
+      labels:
+        app: myapp
+        task: api-server
+    spec:
+      containers:
+        - name: container-2
+          image: node:14
+          command: ["node", "/usr/src/app/server.js"]
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: api-server-code
+              mountPath: /usr/src/app
+      volumes:
+        - name: api-server-code
+          configMap:
+            name: api-server-code-config
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-deployment
+  labels:
+    app: myapp
+    task: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+      task: database
+  template:
+    metadata:
+      labels:
+        app: myapp
+        task: database
+    spec:
+      containers:
+        - name: container-3
+          image: mysql:5.7
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "rootpassword"
+          command: ["docker-entrypoint.sh", "mysqld"]
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          ports:
+            - containerPort: 3306
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: background-job-deployment
+  labels:
+    app: myapp
+    task: background-job
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+      task: background-job
+  template:
+    metadata:
+      labels:
+        app: myapp
+        task: background-job
+    spec:
+      containers:
+        - name: container-4
+          image: python:3.8-slim
+          command: ["python", "/scripts/task.py"]
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: job-scripts
+              mountPath: /scripts
+      volumes:
+        - name: job-scripts
+          configMap:
+            name: job-scripts-config
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-agent-deployment
+  labels:
+    app: myapp
+    task: logging-agent
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      task: logging-agent
+  template:
+    metadata:
+      labels:
+        app: myapp
+        task: logging-agent
+    spec:
+      containers:
+        - name: container-5
+          image: fluentd:v1.12
+          command: ["/bin/bash", "-c", "fluentd -c /fluentd/etc/fluentd.conf"]
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 24224
+          volumeMounts:
+            - name: fluentd-config
+              mountPath: /fluentd/etc
+      volumes:
+        - name: fluentd-config
+          configMap:
+            name: fluentd-config
