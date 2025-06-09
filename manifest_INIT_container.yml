@@ -1,0 +1,43 @@
+#To create an init container that copies code from a GitLab repository before the main container starts, you would use a combination of init containers and volume mounts. 
+#The init container will pull the code from the GitLab repository (using git clone), and the main container will access the code from a shared volume.
+
+#The init container runs first and clones the GitLab repository.
+#Once the init container completes, the main application container starts and accesses the code that was cloned in the shared code-volume.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      initContainers:
+        - name: git-clone
+          image: alpine:3.14
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "apk add --no-cache git && git clone https://gitlab.com/your-repository.git /code"
+          volumeMounts:
+            - name: code-volume
+              mountPath: /code
+      containers:
+        - name: myapp-container
+          image: your-app-image:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: code-volume
+              mountPath: /app
+      volumes:
+        - name: code-volume
+          emptyDir: {}
