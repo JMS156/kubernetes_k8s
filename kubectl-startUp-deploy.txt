@@ -1,0 +1,67 @@
+Create the Deployment YAML file:
+
+Define your deployment and include the replicas field in a .yml file.
+
+Apply the YAML file:
+
+Command:
+
+bash
+Copy
+kubectl apply -f deployment.yml
+Action: Creates the deployment in your Kubernetes cluster.
+
+Check the status of the deployment:
+
+Command:
+
+bash
+Copy
+kubectl get deployments
+Action: Verify that your deployment has been created and is running.
+
+Check the pods (replicas):
+
+Command:
+
+bash
+Copy
+kubectl get pods
+Action: Verify that the desired number of pods are running as replicas.
+
+Scale the deployment (optional):
+
+Command:
+
+bash
+Copy
+kubectl scale deployment <deployment-name> --replicas=<new-replica-count>
+Action: Change the number of replicas (pods) for your deployment.
+
+Get deployment details:
+
+Command:
+
+bash
+Copy
+kubectl describe deployment <deployment-name>
+Action: View detailed information about the deployment.
+
+Delete the deployment (optional):
+
+Command:
+
+bash
+Copy
+kubectl delete -f deployment.yml
+Action: Delete the deployment and its associated pods.
+
+Monitor the deployment logs (optional):
+
+Command:
+
+bash
+Copy
+kubectl logs <pod-name>
+Action: View the logs of a specific pod in the deployment.
+
