@@ -1,0 +1,41 @@
+minikube start: Starts a local Minikube Kubernetes cluster on your machine (or EC2 instance).
+
+minikube start --driver=docker: Starts Minikube with a specific driver (e.g., Docker).
+
+minikube start --cpus=4 --memory=8192: Starts Minikube with custom CPU and memory allocations.
+
+minikube stop: Stops the running Minikube cluster but doesn't delete it.
+
+minikube delete: Deletes the Minikube cluster, removing all resources and virtual machines.
+
+minikube status: Shows the status of the Minikube cluster (running, stopped, etc.).
+
+minikube dashboard: Opens the Kubernetes Dashboard (web UI) for managing the cluster.
+
+minikube ip: Gets the IP address of the Minikube VM (useful for accessing services inside Minikube).
+
+minikube ssh: SSH into the Minikube VM for direct access.
+
+minikube kubectl -- get pods: Runs kubectl commands directly in Minikube without needing to configure kubectl separately.
+
+minikube kubeconfig: Gets the kubeconfig file for Minikube to set up kubectl to point to the Minikube cluster.
+
+minikube addons enable <addon-name>: Enables a specific Minikube addon (e.g., metrics-server, dashboard).
+
+minikube addons disable <addon-name>: Disables a specific Minikube addon.
+
+minikube addons list: Lists all available Minikube addons.
+
+minikube logs: Displays logs from the Minikube cluster, useful for troubleshooting.
+
+minikube update: Updates Minikube to the latest version.
+
+minikube tunnel: Creates a tunnel to expose services to your local machine (useful for LoadBalancer services).
+
+eval $(minikube -p minikube docker-env): Sets environment variables to use Minikube's Docker daemon.
+
+minikube dashboard --url: Opens the Minikube dashboard and displays the URL.
+
+minikube version: Displays the current version of Minikube.
+
+minikube restart: Restarts the Minikube cluster, useful for applying changes.
