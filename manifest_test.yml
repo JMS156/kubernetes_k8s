@@ -1,0 +1,48 @@
+#This file defines five pods named pod-1, pod-2, pod-3, pod-4, and pod-5. 
+#Each pod contains a single container named container-1, container-2, container-3, container-4, and container-5, all running the nginx:latest image.
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+spec:
+  containers:
+    - name: container-1
+      image: nginx:latest
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+spec:
+  containers:
+    - name: container-2
+      image: nginx:latest
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-3
+spec:
+  containers:
+    - name: container-3
+      image: nginx:latest
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-4
+spec:
+  containers:
+    - name: container-4
+      image: nginx:latest
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-5
+spec:
+  containers:
+    - name: container-5
+      image: nginx:latest
